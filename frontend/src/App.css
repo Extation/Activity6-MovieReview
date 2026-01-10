@@ -6,7 +6,7 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #7c8db5;
   min-height: 100vh;
   color: #333;
 }
@@ -36,13 +36,13 @@ body {
   flex: 1;
   padding: 20px;
   gap: 20px;
-  max-width: 1400px;
+  max-width: 1600px;
   margin: 0 auto;
   width: 100%;
 }
 
 .movies-list {
-  flex: 0 0 35%;
+  flex: 0 0 400px;
   background: white;
   border-radius: 12px;
   padding: 20px;
@@ -210,13 +210,13 @@ body {
 }
 
 .form-container {
+  flex: 0 0 450px;
   background: white;
   padding: 25px;
   border-radius: 12px;
-  margin: 20px auto;
-  max-width: 600px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
 .form-container h2 {
@@ -224,13 +224,43 @@ body {
   color: #667eea;
 }
 
-.form-container input {
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group input {
   width: 100%;
   padding: 12px;
-  margin-bottom: 15px;
   border: 1px solid #ddd;
   border-radius: 6px;
   font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.form-group input.error {
+  border-color: #dc3545;
+}
+
+.error-message {
+  display: block;
+  color: #dc3545;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.form-buttons button {
+  flex: 1;
 }
 
 /* Buttons */
@@ -262,11 +292,78 @@ body {
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-left: 10px;
 }
 
 .btn-secondary:hover {
   background: #5a6268;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  width: 90%;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-content h3 {
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 20px;
+}
+
+.modal-content p {
+  margin-bottom: 25px;
+  color: #666;
+  line-height: 1.5;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.modal-buttons button {
+  padding: 10px 20px;
+  min-width: 100px;
 }
 
 .btn-danger {
@@ -304,12 +401,30 @@ body {
   background: #ee5a52;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1400px) {
+  .main-content {
+    flex-wrap: wrap;
+  }
+
+  .movies-list {
+    flex: 1 1 100%;
+    max-height: 400px;
+  }
+
+  .form-container,
+  .movie-detail {
+    flex: 1 1 calc(50% - 10px);
+    max-height: 600px;
+  }
+}
+
+@media (max-width: 768px) {
   .main-content {
     flex-direction: column;
   }
 
   .movies-list,
+  .form-container,
   .movie-detail {
     flex: 1;
     max-height: none;
